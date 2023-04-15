@@ -23,4 +23,5 @@ model DailyRetro {
   userId     String?  @db.VarChar(255)
 
   @@index([userId])
+  @@map("daily_retros")
 }

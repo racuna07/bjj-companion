@@ -1,11 +1,10 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 
 import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const { data: dailyRetros } = api.dailyRetros.getAll.useQuery();
 
   return (
     <>
@@ -17,35 +16,34 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
+            BJJ Companion
           </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
+          <div className="grid grid-cols-1 gap-4 md:gap-8">
+            {dailyRetros &&
+              dailyRetros.map((retro) => (
+                <div
+                  key={retro.id}
+                  className="flex flex-col gap-8 rounded border border-white p-8"
+                >
+                  <div className="text-2xl font-bold text-white">
+                    {`${retro.date.toLocaleDateString()} Retrospective`}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Went Well</h3>
+                    <span className="text-white">{retro.wentWell}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Went Wrong</h3>
+                    <span className="text-white">{retro.wentWrong}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">To Improve</h3>
+                    <span className="text-white">{retro.toImprove}</span>
+                  </div>
+                </div>
+              ))}
           </div>
-          <p className="text-2xl text-white">
-            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-          </p>
+          <p className="text-2xl text-white">By @roacfe</p>
         </div>
       </main>
     </>
