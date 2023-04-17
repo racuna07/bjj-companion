@@ -1,7 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-
-import { api } from "~/utils/api";
 import Header from "~/components/layout/header";
 import { useUser } from "@clerk/nextjs";
 import UserFeed from "~/components/feed/user-feed";
