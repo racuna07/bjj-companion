@@ -24,14 +24,14 @@ const Header = ({}: HeaderProps) => {
   };
   return (
     <header>
-      <div className="navbar bg-base-100 rounded-box bg-opacity-70">
+      <div className="navbar rounded-box bg-base-100 bg-opacity-70">
         <div className="flex-1">
           <Link href="/" className="btn-ghost btn text-xl normal-case">
             BJJ Companion
           </Link>
         </div>
         {isLoaded && !isSignedIn && (
-          <Link href="/sign-in">
+          <Link href="/sign-in/">
             <button className="btn-primary btn">Sign In</button>
           </Link>
         )}
@@ -44,10 +44,7 @@ const Header = ({}: HeaderProps) => {
                 className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
+                  <Link href="/user/">Profile</Link>
                 </li>
                 <li>
                   <a>Settings</a>

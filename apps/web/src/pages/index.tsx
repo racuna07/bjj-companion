@@ -14,9 +14,9 @@ const Home: NextPage = () => {
         <meta name="description" content="BJJ Companion log" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex h-screen w-screen flex-col bg-gradient-to-b from-[#2e026d] to-[#15162c] p-4">
+      <main className="flex h-screen w-screen flex-col bg-gradient-to-b from-[#2e026d] to-[#15162c] p-4 overflow-y-scroll">
         <Header />
-        <div className="flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+        <div className="flex flex-col items-center justify-center gap-12 px-4 mt-16">
           <div className="grid grid-cols-1 gap-4 md:gap-8">
             {isLoaded && isSignedIn ? (
               <UserFeed />
