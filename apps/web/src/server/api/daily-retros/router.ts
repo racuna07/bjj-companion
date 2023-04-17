@@ -1,6 +1,10 @@
 import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  privateProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 export const dailyRetrosRouter = createTRPCRouter({
   create: publicProcedure
@@ -10,7 +14,15 @@ export const dailyRetrosRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.dailyRetro.findMany();
+  getUserRetros: privateProcedure.query(async ({ ctx }) => {
+    const userId = ctx.userId;
+
+    const retros = await ctx.prisma.dailyRetro.findMany({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+      take: 10,
+    });
+    console.log(retros)
+    return retros;
   }),
 });
