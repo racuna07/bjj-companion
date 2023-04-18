@@ -24,7 +24,7 @@ const Header = ({}: HeaderProps) => {
   };
   return (
     <header>
-      <div className="navbar rounded-box bg-base-100 bg-opacity-70">
+      <div className="flex rounded-box sticky top-8 z-50 m-4 h-16 bg-base-100 bg-opacity-70 p-8 items-center">
         <div className="flex-1">
           <Link href="/" className="btn-ghost btn text-xl normal-case">
             BJJ Companion
