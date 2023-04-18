@@ -1,8 +1,9 @@
 import { SignIn } from "@clerk/nextjs";
 
 const SignInPage = () => (
-  <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+  <div className="flex justify-center">
     <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
-  </main>
+  </div>
 );
+
 export default SignInPage;

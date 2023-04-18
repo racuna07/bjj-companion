@@ -1,6 +1,7 @@
 import { type PropsWithChildren } from "react";
 import Head from "next/head";
 import Header from "~/components/layout/header";
+import { Toaster } from "react-hot-toast";
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
@@ -12,6 +13,7 @@ const Layout = ({ children }: PropsWithChildren) => {
       </Head>
       <main className="flex h-screen w-screen ">
         <div className="max-w-screen max-h-screen h-full w-full justify-between overflow-x-hidden bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+          <Toaster/>
           <Header />
           <div className="m-16">{children}</div>
         </div>
