@@ -1,15 +1,15 @@
 import { type NextPage } from "next";
 import { useUser } from "@clerk/nextjs";
 import UserFeed from "~/components/feed/user-feed";
-import PlusIcon from "~/components/icons/plus";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   const { isLoaded, isSignedIn } = useUser();
 
   return (
-    <div className="flex flex-col gap-12 h-full">
-      <div className="grid grid-cols-1 gap-4 md:gap-8">
-        {false ? (
+    <div className="flex flex-col gap-12">
+      <div className="flex flex-col gap-4 md:gap-8">
+        {isLoaded && isSignedIn ? (
           <UserFeed />
         ) : (
           <h1 className="m-auto text-3xl font-extrabold text-white">
@@ -17,11 +17,11 @@ const Home: NextPage = () => {
           </h1>
         )}
       </div>
-      <div className="mt-auto">
+      <div className="m-auto">
         {isLoaded && isSignedIn && (
-          <button className="btn-circle btn">
-            <PlusIcon />
-          </button>
+          <Link href="/daily-retros/create">
+            <button className="glass  btn w-full">Create</button>
+          </Link>
         )}
       </div>
     </div>

@@ -11,9 +11,9 @@ const Layout = ({ children }: PropsWithChildren) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex h-screen w-screen ">
-        <div className="max-w-screen max-h-screen w-full justify-between overflow-x-hidden overflow-y-scroll bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+        <div className="max-w-screen max-h-screen h-full w-full justify-between overflow-x-hidden bg-gradient-to-b from-[#2e026d] to-[#15162c]">
           <Header />
-          <div className="m-16 h-full">{children}</div>
+          <div className="m-16">{children}</div>
         </div>
       </main>
     </>

@@ -1,28 +1,21 @@
-import { z } from "zod";
-
-import {
-  createTRPCRouter,
-  privateProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
+import { DailyRetroSchema } from "~/server/api/daily-retros/schema";
 
 export const dailyRetrosRouter = createTRPCRouter({
-  create: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
+  create: privateProcedure
+    .input(DailyRetroSchema)
+    .mutation(async ({ input, ctx }) => {
+      const userId = ctx.userId;
+      const data = { ...input, userId };
+      return ctx.prisma.dailyRetro.create({ data });
     }),
   getUserRetros: privateProcedure.query(async ({ ctx }) => {
     const userId = ctx.userId;
 
-    const retros = await ctx.prisma.dailyRetro.findMany({
+    return ctx.prisma.dailyRetro.findMany({
       where: { userId },
       orderBy: { createdAt: "desc" },
       take: 10,
     });
-    console.log(retros)
-    return retros;
   }),
 });
